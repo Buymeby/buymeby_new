@@ -1,5 +1,4 @@
 import React from 'react'
-import Styles from './Styles/VendorListStyles'
 import { connect } from 'react-redux'
 import {
   Screen,
@@ -18,44 +17,51 @@ import {
   Title
 } from '@shoutem/ui';
 
+import LoadingSpinner from './LoadingSpinner'
+
 
 class VendorList extends React.Component {
 
   render () {
     const vendors = this.props.vendors;
-    if (!vendors) {
-      return null;
-    }
-
-    return (
-      vendors.map((vendor, i) => (
-        <TouchableOpacity key={i} onPress={this.props.openVendorDetails.bind(this, vendor)}>
-          <Row>
-            <Image
-              styleName="small rounded-corners"
-              source={{ uri: vendor.image_src || vendor.logo_url }}
-            />
-            <View styleName="vertical stretch space-between">
-              <Subtitle>{vendor.name}</Subtitle>
-              <View styleName="horizontal">
-                <Caption>{vendor.description}</Caption>
+    const fetching = this.props.fetching;
+    
+    if (fetching) {
+      return (
+        <LoadingSpinner />
+      )
+    } else {
+      return (
+        vendors.map((vendor, i) => (
+          <TouchableOpacity key={i} onPress={this.props.openVendorDetails.bind(this, vendor)}>
+            <Row>
+              <Image
+                styleName="small rounded-corners"
+                source={{ uri: vendor.image_src || vendor.logo_url }}
+              />
+              <View styleName="vertical stretch space-between">
+                <Subtitle>{vendor.name}</Subtitle>
+                <View styleName="horizontal">
+                  <Caption>{vendor.description}</Caption>
+                </View>
               </View>
-            </View>
-            <Button styleName="right-icon" onPress={this.props.openVendorDetails.bind(this, vendor)}>
-              <Icon name="right-arrow"/>
-            </Button>
-          </Row>
-          <Divider styleName="line" />
-        </TouchableOpacity>
-      ))
-    )
+              <Button styleName="right-icon" onPress={this.props.openVendorDetails.bind(this, vendor)}>
+                <Icon name="right-arrow"/>
+              </Button>
+            </Row>
+            <Divider styleName="line" />
+          </TouchableOpacity>
+        ))
+      )
+    }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
     vendors: state.vendor.vendors,
-    navigation: state.nav
+    fetching: state.vendor.fetching,
+    error: state.vendor.error
   }
 }
 

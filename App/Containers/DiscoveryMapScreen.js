@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import styles from './Styles/ScreenStyles'
 
 class DiscoveryMapScreen extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.getVendorList()
   }
 

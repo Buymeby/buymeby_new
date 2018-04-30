@@ -1,10 +1,14 @@
 import React from 'react'
 import { View } from 'react-native'
 import MapView from 'react-native-maps'
+import { connect } from 'react-redux'
+
 import VendorLocatorCallout from './VendorLocatorCallout'
+import LoadingSpinner from './LoadingSpinner'
+
 import Styles from './Styles/VendorLocatorStyles'
 import { calculateRegion } from '../Lib/MapHelpers'
-import { connect } from 'react-redux'
+
 
 /* ***********************************************************
 * IMPORTANT!!! Before you get started, if you are going to support Android,
@@ -62,18 +66,25 @@ class VendorLocator extends React.Component {
 
   render () {
     const vendors = this.props.vendors;
+    const fetching = this.props.fetching;
 
-    return (
-      <MapView
-        style={Styles.container}
-        region={this.props.region}
-        onRegionChangeComplete={this.onRegionChange}
-        showsUserLocation={true}
-        provider="google"
-      >
-        {vendors.map((vendor) => this.renderMapMarkers(vendor))}
-      </MapView>
-    )
+    if (fetching) {
+      return (
+        <LoadingSpinner />
+      )
+    } else {
+      return (
+        <MapView
+          style={Styles.container}
+          region={this.props.region}
+          onRegionChangeComplete={this.onRegionChange}
+          showsUserLocation={true}
+          provider="google"
+        >
+          {vendors.map((vendor) => this.renderMapMarkers(vendor))}
+        </MapView>
+      )
+    }
   }
 }
 
@@ -81,7 +92,9 @@ const mapStateToProps = (state) => {
   return {
     vendors: state.vendor.vendors,
     locations: state.vendor.locations,
-    region: state.vendor.region
+    region: state.vendor.region,
+    fetching: state.vendor.fetching,
+    error: state.vendor.error
   }
 }
 
