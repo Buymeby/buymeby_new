@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Text, Animated, Easing, TouchableOpacity } from 'react-native'
+import { Text, Animated, Easing, TouchableOpacity, Image } from 'react-native'
 import { StackNavigator, DrawerNavigator, TabNavigator, TabBarTop } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -40,9 +40,8 @@ const DiscoveryTab = TabNavigator({
   lazy: false,
   animationEnabled:false,
   tabBarOptions: {
-    style:{
-      backgroundColor: '#d3d3d3',
-    }
+    style: styles.tabHeader,
+    labelStyle: styles.tabLabel
   }
 })
 
@@ -50,9 +49,9 @@ const PrimaryNav = StackNavigator({
   DiscoveryTab: {
     screen: DiscoveryTab,
     navigationOptions: ({navigation}) => ({
-      headerTitle: "Buymeby",
+      headerTitle: <Image source={require('../Images/logo.png')} style={styles.logo} />,
       headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
-                    <Icon name="bars" size={20} style={{paddingLeft: 10}} />
+                    <Icon name="bars" size={20} style={styles.headerIconLeft} />
                   </TouchableOpacity>
     })
   }
@@ -65,8 +64,9 @@ const PrimaryNav = StackNavigator({
   navigationOptions: ({navigation}) => ({
     gesturesEnabled: false,
     headerRight: <TouchableOpacity onPress={() => { navigation.navigate('CartScreen') }}>
-                   <Icon name="shopping-cart" size={20} style={{paddingRight: 10}} />
-                 </TouchableOpacity>
+                   <Icon name="shopping-cart" size={20} style={styles.headerIconRight} />
+                 </TouchableOpacity>,
+    headerStyle: styles.header
   })
 })
 
