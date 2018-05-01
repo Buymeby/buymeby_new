@@ -1,8 +1,13 @@
 import { StyleSheet } from 'react-native'
-import { ApplicationStyles } from '../../Themes/'
+import { ApplicationStyles, Colors, Metrics } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
+  mapContainer: {
+    flex: 1,
+    paddingTop: Metrics.baseMargin,
+    backgroundColor: Colors.transparent
+  },
   container: {
     ...StyleSheet.absoluteFillObject,
     flex: 1,

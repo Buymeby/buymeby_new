@@ -10,7 +10,8 @@ const { Types, Creators } = createActions({
   vendorFailure: null,
   vendorListRequest: null,
   vendorListSuccess: ['vendors'],
-  vendorListFailure: null
+  vendorListFailure: null,
+  calloutVendor: ['calloutVendor']
 })
 
 export const VendorTypes = Types
@@ -21,15 +22,16 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   data: null,
   fetching: null,
-  selected_vendor: {
-    hours: [],
-    items: []
-  },
   vendors: [],
   longitude: null,
   latitude: null,
   locations: [],
   region: null,
+  selected_vendor: {
+    hours: [],
+    items: []
+  },
+  calloutVendor: null,
   error: null
 })
 
@@ -58,11 +60,17 @@ export const listSuccess = (state, action) => {
   }))
   const region = calculateRegion(locations, { latPadding: 0.1, longPadding: 0.1 })
 
-  return state.merge({ fetching: false, error: null, vendors, locations, region })
+  return state.merge({ fetching: false, error: null, vendors, locations, region, calloutVendor: vendors[0] })
 }
 
 export const listFailure = state =>
   state.merge({ fetching: false, error: true })
+
+export const calloutVendor = (state, action) => {
+  const { calloutVendor } = action
+  return state.merge({ calloutVendor })
+}
+
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -72,5 +80,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.VENDOR_FAILURE]: failure,
   [Types.VENDOR_LIST_REQUEST]: listRequest,
   [Types.VENDOR_LIST_SUCCESS]: listSuccess,
-  [Types.VENDOR_LIST_FAILURE]: listFailure
+  [Types.VENDOR_LIST_FAILURE]: listFailure,
+  [Types.CALLOUT_VENDOR]: calloutVendor
 })
