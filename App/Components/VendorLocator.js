@@ -1,5 +1,4 @@
 import React from 'react'
-import { View } from 'react-native'
 import MapView from 'react-native-maps'
 import { connect } from 'react-redux'
 
@@ -59,7 +58,7 @@ class VendorLocator extends React.Component {
   renderMapMarkers (vendor) {
     return (
       <MapView.Marker key={vendor.name} coordinate={{latitude: Number(vendor.latitude), longitude: Number(vendor.longitude)}}>
-        <VendorLocatorCallout location={{title: vendor.name, latitude: Number(vendor.latitude), longitude: Number(vendor.longitude)}} onPress={this.props.openVendorDetails.bind(this, vendor)} />
+        <VendorLocatorCallout location={{latitude: Number(vendor.latitude), longitude: Number(vendor.longitude)}} vendor={{image_src: vendor.image_src, name: vendor.name, description: vendor.description}} onPress={this.props.openVendorDetails.bind(this, vendor)} />
       </MapView.Marker>
     )
   }

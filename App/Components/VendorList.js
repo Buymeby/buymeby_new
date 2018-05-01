@@ -1,14 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {
-  Screen,
   Divider,
-  ScrollView,
-  GridRow,
   TouchableOpacity,
   Image,
   Subtitle,
-  Card,
   View,
   Caption,
   Row,
@@ -25,7 +21,7 @@ class VendorList extends React.Component {
   render () {
     const vendors = this.props.vendors;
     const fetching = this.props.fetching;
-    
+
     if (fetching) {
       return (
         <LoadingSpinner />

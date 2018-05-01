@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { ScrollView, Text, Image, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import VendorActions from '../Redux/VendorRedux'
 import VendorLocator from '../Components/VendorLocator'
+
 import { connect } from 'react-redux'
 
 // Styles
