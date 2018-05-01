@@ -14,6 +14,7 @@ import {
 } from '@shoutem/ui';
 
 import LoadingSpinner from './LoadingSpinner'
+import VendorListItem from './VendorListItem'
 
 
 class VendorList extends React.Component {
@@ -29,24 +30,7 @@ class VendorList extends React.Component {
     } else {
       return (
         vendors.map((vendor, i) => (
-          <TouchableOpacity key={i} onPress={this.props.openVendorDetails.bind(this, vendor)}>
-            <Row>
-              <Image
-                styleName="small rounded-corners"
-                source={{ uri: vendor.image_src || vendor.logo_url }}
-              />
-              <View styleName="vertical stretch space-between">
-                <Subtitle>{vendor.name}</Subtitle>
-                <View styleName="horizontal">
-                  <Caption>{vendor.description}</Caption>
-                </View>
-              </View>
-              <Button styleName="right-icon" onPress={this.props.openVendorDetails.bind(this, vendor)}>
-                <Icon name="right-arrow"/>
-              </Button>
-            </Row>
-            <Divider styleName="line" />
-          </TouchableOpacity>
+          <VendorListItem vendor={vendor} key={i}/>
         ))
       )
     }

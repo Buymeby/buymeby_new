@@ -20,9 +20,10 @@ class VendorListItem extends React.Component {
 
   render () {
     const { vendor } = this.props
+    const { key } = this.props
 
     return (
-      <TouchableOpacity onPress={this.props.openVendorDetails.bind(this, vendor)}>
+      <TouchableOpacity key={key} onPress={this.props.openVendorDetails.bind(this, vendor)}>
         <Row>
           <Image
             styleName="small rounded-corners"
