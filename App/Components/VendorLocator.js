@@ -97,7 +97,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  openVendorDetails: (vendor) => dispatch({ type: 'NavigateVendor', vendor: vendor }),
   calloutVendor: (vendor) => dispatch(VendorActions.calloutVendor(vendor))
 })
 

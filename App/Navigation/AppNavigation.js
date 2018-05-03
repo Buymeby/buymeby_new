@@ -9,6 +9,8 @@ import RegistrationScreen from '../Containers/RegistrationScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import DiscoveryMapScreen from '../Containers/DiscoveryMapScreen'
 import DiscoveryListScreen from '../Containers/DiscoveryListScreen'
+import VendorDetailsScreen from '../Containers/VendorDetailsScreen'
+import VendorStoreScreen from '../Containers/VendorStoreScreen'
 import styles from './Styles/NavigationStyles'
 
 const noTransitionConfig = () => ({
@@ -16,6 +18,32 @@ const noTransitionConfig = () => ({
     duration: 0,
     timing: Animated.timing,
     easing: Easing.step0
+  }
+})
+
+const VendorTab = TabNavigator({
+  VendorDetailsScreen: {
+    screen: VendorDetailsScreen,
+    navigationOptions: {
+      title: 'Profile'
+    }
+  },
+  VendorStoreScreen: {
+    screen: VendorStoreScreen,
+    navigationOptions: {
+      title: 'Shop'
+    }
+  }
+}, {
+  initialRouteName: 'VendorDetailsScreen',
+  tabBarComponent: TabBarTop,
+  tabBarPosition: 'top',
+  swipeEnabled: true,
+  lazy: false,
+  animationEnabled:false,
+  tabBarOptions: {
+    style: styles.tabHeader,
+    labelStyle: styles.tabLabel
   }
 })
 
@@ -54,6 +82,9 @@ const PrimaryNav = StackNavigator({
                     <Icon name="bars" size={20} style={styles.headerIconLeft} />
                   </TouchableOpacity>
     })
+  },
+  VendorTab: {
+    screen: VendorTab
   }
 }, {
   headerMode: 'float',

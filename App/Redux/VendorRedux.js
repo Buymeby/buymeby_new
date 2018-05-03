@@ -5,7 +5,7 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  vendorRequest: ['data'],
+  vendorRequest: ['vendor'],
   vendorSuccess: ['vendor'],
   vendorFailure: null,
   vendorListRequest: null,
@@ -37,8 +37,8 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-export const request = (state, { data }) =>
-  state.merge({ fetching: true, data, payload: null })
+export const request = (state, { vendor }) =>
+  state.merge({ fetching: true, payload: null })
 
 export const success = (state, action) => {
   const { vendor } = action

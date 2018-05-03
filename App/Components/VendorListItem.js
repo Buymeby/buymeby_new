@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 import {
-  Divider,
   TouchableOpacity,
   Image,
   Subtitle,
@@ -11,6 +11,8 @@ import {
   Button,
   Icon
 } from '@shoutem/ui';
+
+import VendorActions from '../Redux/VendorRedux'
 
 
 class VendorListItem extends React.Component {
@@ -39,14 +41,16 @@ class VendorListItem extends React.Component {
             <Icon name="right-arrow"/>
           </Button>
         </Row>
-        <Divider styleName="line" />
       </TouchableOpacity>
     )
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  openVendorDetails: (vendor) => dispatch({ type: 'NavigateVendor', vendor: vendor })
+  openVendorDetails: (vendor) => {
+    dispatch(VendorActions.vendorRequest(vendor))
+    dispatch(NavigationActions.navigate({ routeName: 'VendorTab' }))
+  }
 })
 
 export default connect(null, mapDispatchToProps)(VendorListItem)

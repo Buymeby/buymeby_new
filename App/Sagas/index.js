@@ -43,8 +43,7 @@ export default function * root () {
     // takeLatest(CartTypes.CLEAR, clearCart),
 
     takeLatest(VendorTypes.VENDOR_LIST_REQUEST, getVendorList, api),
+    takeLatest(VendorTypes.VENDOR_REQUEST, getVendor, api)
     // takeLatest(OrderTypes.ORDER_LIST_REQUEST, getOrderList, api),
-
-    takeLatest('NavigateVendor', getVendor, api)
   ])
 }
