@@ -82,7 +82,7 @@ export function * addToCart (action) {
 
   if (initial_cart_count + quantity == updated_cart_count) {
     yield put(CartActions.addSuccess(updated_cart, updated_cart_count))
-    yield put({ type: 'NavigateBack' })
+    yield put(NavigationActions.back())
   } else {
     yield put(CartActions.addFailure())
   }

@@ -19,7 +19,6 @@ class ItemDetailsScreen extends Component {
     this.state = {
       selectedQuantity: 1
     };
-    this.setQuantity = (quantity) => this.setQuantity.bind(this, quantity)
   }
 
   static navigationOptions = ({ navigation, navigationOptions }) => {
@@ -28,14 +27,14 @@ class ItemDetailsScreen extends Component {
     };
   };
 
-  setQuantity(quantity) {
+  setQuantity = (quantity) => {
     this.setState({ selectedQuantity: quantity })
   }
 
   render () {
     const item = this.props.item
     const vendor = this.props.vendor
-    const selectedQuantity = 1
+    const selectedQuantity = this.state.selectedQuantity
 
     return (
       <View style={styles.mainContainer}>
@@ -73,7 +72,9 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addToCart: (vendor_id, item_id, quantity) => dispatch(CartActions.add(vendor_id, item_id, quantity))
+  addToCart: (vendor_id, item_id, quantity) => {
+    dispatch(CartActions.add(vendor_id, item_id, quantity))
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemDetailsScreen)

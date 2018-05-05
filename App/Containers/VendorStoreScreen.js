@@ -18,7 +18,7 @@ export default class VendorStoreScreen extends Component {
 
   render () {
     return (
-      <View style={styles.mainContainer}>
+      <View style={styles.container}>
         <ScrollView style={styles.container}>
           <ItemList />
         </ScrollView>
