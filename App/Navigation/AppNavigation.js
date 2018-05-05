@@ -9,9 +9,12 @@ import RegistrationScreen from '../Containers/RegistrationScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import DiscoveryMapScreen from '../Containers/DiscoveryMapScreen'
 import DiscoveryListScreen from '../Containers/DiscoveryListScreen'
+import ItemDetailsScreen from '../Containers/ItemDetailsScreen'
+import CartScreen from '../Containers/CartScreen'
 import VendorDetailsScreen from '../Containers/VendorDetailsScreen'
 import VendorStoreScreen from '../Containers/VendorStoreScreen'
 import styles from './Styles/NavigationStyles'
+import { Colors } from '../Themes/'
 
 const noTransitionConfig = () => ({
   transitionSpec: {
@@ -79,12 +82,24 @@ const PrimaryNav = StackNavigator({
     navigationOptions: ({navigation}) => ({
       headerTitle: <Image source={require('../Images/logo.png')} style={styles.logo} />,
       headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
-                    <Icon name="bars" size={20} style={styles.headerIconLeft} />
+                    <Icon name="bars" size={25} style={styles.headerIconLeft} />
                   </TouchableOpacity>
     })
   },
   VendorTab: {
     screen: VendorTab
+  },
+  ItemDetailsScreen: {
+    screen: ItemDetailsScreen
+  },
+  CartScreen: {
+    screen: CartScreen,
+    navigationOptions: ({navigation}) => ({
+      headerTitle: "Cart",
+      headerRight: <TouchableOpacity onPress={() => { navigation.navigate('DiscoveryTab') }}>
+                     <Icon name="home" size={25} style={styles.headerIconRight} />
+                   </TouchableOpacity>
+    })
   }
 }, {
   headerMode: 'float',
@@ -95,9 +110,11 @@ const PrimaryNav = StackNavigator({
   navigationOptions: ({navigation}) => ({
     gesturesEnabled: false,
     headerRight: <TouchableOpacity onPress={() => { navigation.navigate('CartScreen') }}>
-                   <Icon name="shopping-cart" size={20} style={styles.headerIconRight} />
+                   <Icon name="shopping-cart" size={25} style={styles.headerIconRight} />
                  </TouchableOpacity>,
-    headerStyle: styles.header
+    headerStyle: styles.header,
+    headerBackTitle: null,
+    headerTintColor: Colors.secondary
   })
 })
 

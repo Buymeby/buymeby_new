@@ -4,7 +4,6 @@ import VendorActions from '../Redux/VendorRedux'
 import VendorList from '../Components/VendorList'
 import { connect } from 'react-redux'
 
-// Styles
 import styles from './Styles/ScreenStyles'
 
 class DiscoveryListScreen extends Component {

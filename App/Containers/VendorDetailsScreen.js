@@ -7,8 +7,7 @@ import {
   TouchableOpacity,
   Image,
   KeyboardAvoidingView,
-  StyleSheet,
-  PixelRatio
+  StyleSheet
 } from 'react-native'
 import {
   Heading,
@@ -18,12 +17,8 @@ import {
   Subtitle,
   Caption,
   Icon,
-  Overlay,
-  Button,
   Row,
-  Switch,
   Divider,
-  TextInput,
   View
 } from '@shoutem/ui'
 
@@ -135,35 +130,15 @@ const mapStateToProps = (state) => {
     description: state.vendor.selected_vendor.description,
     latitude: state.vendor.selected_vendor.latitude,
     longitude: state.vendor.selected_vendor.longitude,
-    place_id: state.vendor.selected_vendor.place_id,
     address: state.vendor.selected_vendor.address,
     hours: state.vendor.selected_vendor.hours,
     fetching: state.vendor.fetching
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  editLogo: () => dispatch(NavigationActions.navigate({ routeName: 'LogoUploadScreen' })),
-  editDescription: () => dispatch(NavigationActions.navigate({ routeName: 'EditDescriptionScreen' })),
-  editLocation: () => dispatch(NavigationActions.navigate({ routeName: 'EditLocationScreen' })),
-  editHours: () => dispatch(NavigationActions.navigate({ routeName: 'EditHoursScreen' }))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(VendorDetailsScreen)
+export default connect(mapStateToProps, null)(VendorDetailsScreen)
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  },
-  avatarContainer: {
-    borderColor: '#9B9B9B',
-    borderWidth: 1 / PixelRatio.get(),
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   avatar: {
     borderRadius: 75,
     width: 150,

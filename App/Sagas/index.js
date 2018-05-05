@@ -9,7 +9,7 @@ import { StartupTypes } from '../Redux/StartupRedux'
 import { VendorTypes } from '../Redux/VendorRedux'
 // import { OrderTypes } from '../Redux/OrderRedux'
 import { AuthTypes } from '../Redux/AuthRedux'
-// import { CartTypes } from '../Redux/CartRedux'
+import { CartTypes } from '../Redux/CartRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -17,7 +17,7 @@ import { startup } from './StartupSagas'
 import { getVendor, getVendorList } from './VendorSagas'
 // import { getOrder, getOrderList } from './OrderSagas'
 import { register, login, verifyToken } from './AuthSagas'
-// import { initializeCart, addToCart, removeFromCart, clearCart, populateCart, placeOrder } from './CartSagas'
+import { initializeCart, addToCart, removeFromCart, clearCart, populateCart, placeOrder } from './CartSagas'
 
 /* ------------- API ------------- */
 
@@ -35,12 +35,12 @@ export default function * root () {
     takeLatest(AuthTypes.TOKEN_REQUEST, verifyToken, api),
     takeLatest(AuthTypes.REGISTRATION_REQUEST, register, api),
 
-    // takeLatest(CartTypes.INITIALIZE, initializeCart),
-    // takeLatest(CartTypes.POPULATE, populateCart, api),
-    // takeLatest(CartTypes.ORDER, placeOrder, api),
-    // takeLatest(CartTypes.ADD, addToCart),
-    // takeLatest(CartTypes.REMOVE, removeFromCart),
-    // takeLatest(CartTypes.CLEAR, clearCart),
+    takeLatest(CartTypes.INITIALIZE, initializeCart),
+    takeLatest(CartTypes.POPULATE, populateCart, api),
+    takeLatest(CartTypes.ORDER, placeOrder, api),
+    takeLatest(CartTypes.ADD, addToCart),
+    takeLatest(CartTypes.REMOVE, removeFromCart),
+    takeLatest(CartTypes.CLEAR, clearCart),
 
     takeLatest(VendorTypes.VENDOR_LIST_REQUEST, getVendorList, api),
     takeLatest(VendorTypes.VENDOR_REQUEST, getVendor, api)

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 import {
   Screen,
   ScrollView,
@@ -31,14 +32,9 @@ class ItemList extends Component {
               styleName="medium-wide"
               source={{ uri: item.image_file_src  }}
             />
-            <View styleName="content">
-              <Subtitle numberOfLines={2}>{item.name}</Subtitle>
-              <View styleName="horizontal v-center space-between">
-                <View styleName="horizontal">
-                  <Caption styleName="md-gutter-right">${item.price}/{item.unit}</Caption>
-                  <Caption styleName="line-through">${item.price}</Caption>
-                </View>
-              </View>
+            <View>
+              <Subtitle>{item.name}</Subtitle>
+              <Caption>${item.price}/{item.unit}</Caption>
             </View>
           </Card>
         </TouchableOpacity>
@@ -73,7 +69,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  openItemDetails: (item) => dispatch({ type: 'NavigateItem', item: item })
+  openItemDetails: (item) => dispatch(NavigationActions.navigate({ routeName: 'ItemDetailsScreen', params: { item: item }}))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemList)
