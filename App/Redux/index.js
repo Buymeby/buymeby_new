@@ -11,7 +11,7 @@ export const reducers = combineReducers({
   cart: require('./CartRedux').reducer,
   startup: require('./StartupRedux').reducer,
   vendor: require('./VendorRedux').reducer,
-  // order: require('./OrderRedux').reducer,
+  order: require('./OrderRedux').reducer,
   form: formReducer
 })
 

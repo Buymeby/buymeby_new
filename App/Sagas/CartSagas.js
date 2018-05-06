@@ -2,6 +2,7 @@ import { call, put } from 'redux-saga/effects'
 import CartActions from '../Redux/CartRedux'
 import { NavigationActions } from 'react-navigation'
 import { AsyncStorage } from 'react-native'
+import Toast from 'react-native-simple-toast'
 import _ from 'lodash'
 
 // Cart looks as follow:
@@ -82,8 +83,10 @@ export function * addToCart (action) {
 
   if (initial_cart_count + quantity == updated_cart_count) {
     yield put(CartActions.addSuccess(updated_cart, updated_cart_count))
+    Toast.show('Item added to cart');
     yield put(NavigationActions.back())
   } else {
+    Toast.show('Add to cart failed, please try again');
     yield put(CartActions.addFailure())
   }
 }

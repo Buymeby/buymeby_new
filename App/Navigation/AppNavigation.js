@@ -13,6 +13,9 @@ import ItemDetailsScreen from '../Containers/ItemDetailsScreen'
 import CartScreen from '../Containers/CartScreen'
 import VendorDetailsScreen from '../Containers/VendorDetailsScreen'
 import VendorStoreScreen from '../Containers/VendorStoreScreen'
+import OrdersScreen from '../Containers/OrdersScreen'
+import OrderDetailsScreen from '../Containers/OrderDetailsScreen'
+import ProfileScreen from '../Containers/ProfileScreen'
 import styles from './Styles/NavigationStyles'
 import { Colors } from '../Themes/'
 
@@ -118,10 +121,44 @@ const PrimaryNav = StackNavigator({
   })
 })
 
+const OrdersStack = StackNavigator({
+  OrdersScreen: {
+    screen: OrdersScreen,
+    navigationOptions: ({navigation}) => ({
+    headerTitle: "Orders",
+    headerRight: <TouchableOpacity onPress={() => { navigation.navigate('CartScreen') }}>
+                  <Icon name="shopping-cart" size={25} style={styles.headerIconRight} />
+                </TouchableOpacity>
+    })
+  },
+  OrderDetailsScreen: { screen: OrderDetailsScreen }
+}, {
+  headerMode: 'float',
+  navigationOptions: ({navigation}) => ({
+    gesturesEnabled: false,
+    headerTitle: 'Buymeby',
+    headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
+                  <Icon name="bars" size={25} style={styles.headerIconLeft} />
+                </TouchableOpacity>
+  })
+})
+
+const ProfileStack = StackNavigator({
+  ProfileScreen: { screen: ProfileScreen }
+}, {
+  headerMode: 'float',
+  navigationOptions: ({navigation}) => ({
+    headerTitle: "Profile",
+    headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
+                   <Icon name="bars" size={20} style={styles.headerIconLeft} />
+                 </TouchableOpacity>
+  })
+})
+
 const DrawerNav = DrawerNavigator({
   PrimaryNav: { screen: PrimaryNav, navigationOptions: {title: 'Discover'}},
-  // Profile: { screen: ProfileStack, navigationOptions: {title: 'Profile'} },
-  // Orders: { screen: OrdersStack, navigationOptions: {title: 'Orders'} },
+  Profile: { screen: ProfileStack, navigationOptions: {title: 'Profile'} },
+  Orders: { screen: OrdersStack, navigationOptions: {title: 'Orders'} },
   Register: { screen: RegistrationScreen, navigationOptions: {title: 'Logout'} },
 }, {
   gesturesEnabled: false
