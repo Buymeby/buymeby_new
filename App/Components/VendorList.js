@@ -1,17 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {
-  Divider,
-  TouchableOpacity,
-  Image,
-  Subtitle,
-  View,
-  Caption,
-  Row,
-  Button,
-  Icon,
-  Title
-} from '@shoutem/ui';
 
 import LoadingSpinner from './LoadingSpinner'
 import VendorListItem from './VendorListItem'

@@ -24,6 +24,7 @@ import {
 
 import LoadingSpinner from '../Components/LoadingSpinner'
 import timeToHumanReadable from '../Lib/OperationalHoursHelper'
+import Chevron from '../Components/Chevron'
 
 class VendorDetailsScreen extends Component {
   days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -79,7 +80,7 @@ class VendorDetailsScreen extends Component {
                   <Subtitle styleName="sm-gutter-bottom">Address</Subtitle>
                   <Text>{this.props.address}</Text>
                 </View>
-                <Icon styleName="disclosure" name="right-arrow" />
+                <Chevron />
               </Row>
             </TouchableOpacity>
             <Divider styleName='line' />

@@ -1,7 +1,7 @@
 import React from 'react'
 import { List, ListItem } from 'react-native-elements'
 import { connect } from 'react-redux'
-import CartActions from '../Redux/CartRedux'
+import { NavigationActions } from 'react-navigation'
 import {
   Screen,
   ScrollView,
@@ -18,6 +18,10 @@ import {
   Title,
   Text
 } from '@shoutem/ui';
+
+import VendorActions from '../Redux/VendorRedux'
+import CartActions from '../Redux/CartRedux'
+import Chevron from '../Components/Chevron'
 
 
 class CartItemList extends React.Component {
@@ -40,7 +44,7 @@ class CartItemList extends React.Component {
           <TouchableOpacity onPress={this.props.navigateVendor.bind(this, vendor)}>
             <Row styleName="small">
               <Title>{vendor.name}</Title>
-              <Icon styleName="disclosure" name="right-arrow" />
+              <Chevron />
             </Row>
           </TouchableOpacity>
             {
@@ -54,7 +58,6 @@ class CartItemList extends React.Component {
                     <Subtitle>{item.name}</Subtitle>
                     <View styleName="horizontal">
                       <Subtitle styleName="md-gutter-right">${item.price}</Subtitle>
-                      <Caption styleName="line-through md-gutter-right">${item.price}</Caption>
                     </View>
                     <Caption>Quantity: {cart[vendor.id][item.id]}</Caption>
                   </View>
@@ -78,7 +81,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   removeFromCart: (vendor_id, item_id) => dispatch(CartActions.remove(vendor_id, item_id)),
-  navigateVendor: (vendor) => dispatch({ type: 'NavigateVendor', vendor: vendor })
+  navigateVendor: (vendor) => {
+    dispatch(VendorActions.vendorRequest(vendor))
+    dispatch(NavigationActions.navigate({ routeName: 'VendorTab' }))
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartItemList)

@@ -8,12 +8,11 @@ import {
   View,
   Caption,
   Row,
-  Button,
-  Icon
+  Button
 } from '@shoutem/ui';
 
 import VendorActions from '../Redux/VendorRedux'
-
+import Chevron from '../Components/Chevron'
 
 class VendorListItem extends React.Component {
   constructor (props) {
@@ -38,7 +37,7 @@ class VendorListItem extends React.Component {
             </View>
           </View>
           <Button styleName="right-icon">
-            <Icon name="right-arrow"/>
+            <Chevron />
           </Button>
         </Row>
       </TouchableOpacity>
