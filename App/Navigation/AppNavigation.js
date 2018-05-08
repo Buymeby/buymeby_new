@@ -158,7 +158,10 @@ const ProfileStack = StackNavigator({
     headerTitle: "Profile",
     headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
                    <Icon name="bars" size={20} style={styles.headerIconLeft} />
-                 </TouchableOpacity>
+                 </TouchableOpacity>,
+    headerStyle: styles.header,
+    headerBackTitle: null,
+    headerTintColor: Colors.secondary
   })
 })
 

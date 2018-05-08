@@ -5,6 +5,8 @@ export default StyleSheet.create({
   header: {
     backgroundColor: Colors.background,
     borderBottomColor: Colors.background,
+    elevation: 0,
+    shadowOpacity: 0
   },
   tabHeader: {
     backgroundColor: Colors.background
