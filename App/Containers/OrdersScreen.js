@@ -1,32 +1,36 @@
 import React, { Component } from 'react'
-import OrderActions from '../Redux/OrderRedux'
+import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import {
-  Screen,
   Divider,
   ScrollView,
-  GridRow,
   TouchableOpacity,
   Image,
-  Icon,
   Subtitle,
   View,
   Caption,
   Row,
-  Button,
   Title,
   Text
 } from '@shoutem/ui';
 
+import OrderActions from '../Redux/OrderRedux'
+import Chevron from '../Components/Chevron'
+import LoadingSpinner from '../Components/LoadingSpinner'
+
 class OrdersScreen extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.getOrderList()
   }
 
   render () {
     const orders = this.props.orders;
-    if (!orders) {
-      return null;
+    const fetching = this.props.fetching;
+
+    if (fetching) {
+      return (
+        <LoadingSpinner />
+      )
     }
 
     return (
@@ -48,11 +52,8 @@ class OrdersScreen extends Component {
                     <Caption>{order.created_description}</Caption>
                   </View>
                 </View>
-                <Button styleName="right-icon">
-                  <Icon name="right-arrow"/>
-                </Button>
+                <Chevron />
               </Row>
-              <Divider styleName="line" />
             </TouchableOpacity>
           ))
         }
@@ -65,13 +66,16 @@ class OrdersScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     orders: state.order.orders,
-    navigation: state.nav
+    fetching: state.order.fetching
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
   getOrderList: () => dispatch(OrderActions.orderListRequest()),
-  openOrderDetails: (order) => dispatch({ type: 'NavigateOrder', order: order })
+  openOrderDetails: (order) => {
+    dispatch(OrderActions.orderRequest(order.id))
+    dispatch(NavigationActions.navigate({ routeName: 'OrderDetailsScreen', params: { order: order }}))
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrdersScreen)

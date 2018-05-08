@@ -150,8 +150,10 @@ export function * placeOrder (api, action) {
   if (response.ok) {
     yield put(CartActions.orderSuccess())
     yield put(CartActions.clear())
+    Toast.show('Order reserved! Please remember to pick it up by end of day');
     yield put(NavigationActions.navigate({ routeName: 'OrdersScreen' }))
   } else {
+    Toast.show('Something went wrong, please try again');
     yield put(CartActions.orderFailure())
   }
 }

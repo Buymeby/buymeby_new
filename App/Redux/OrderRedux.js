@@ -5,7 +5,7 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  orderRequest: ['data'],
+  orderRequest: ['order_id'],
   orderSuccess: ['order'],
   orderFailure: null,
   orderListRequest: null,
@@ -20,7 +20,7 @@ export default Creators
 
 export const INITIAL_STATE = Immutable({
   data: null,
-  fetching: null,
+  fetching: false,
   selected_order: null,
   orders: [],
   error: null
@@ -28,8 +28,8 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Reducers ------------- */
 
-export const request = (state, { data }) =>
-  state.merge({ fetching: true, data, payload: null })
+export const request = (state) =>
+  state.merge({ fetching: true, payload: null })
 
 export const success = (state, action) => {
   const { order } = action

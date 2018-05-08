@@ -34,7 +34,6 @@ class OrderDetailsScreen extends Component {
                           <View styleName="vertical stretch space-between">
                             <Subtitle>{item.name}</Subtitle>
                             <View styleName="horizontal">
-                              <Subtitle styleName="md-gutter-right">${item.price}</Subtitle>
                               <Caption styleName="line-through md-gutter-right">${item.price}</Caption>
                             </View>
                             <View styleName="horizontal">
@@ -49,17 +48,13 @@ class OrderDetailsScreen extends Component {
               </View>
             ))
           }
-          <Divider styleName="line" />
-          <Button onPress={this.props.completeOrder.bind(this)}>
-            <Text>Complete Order</Text>
-          </Button>
         </ScrollView>
       </View>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     order_details: state.order.selected_order
   }

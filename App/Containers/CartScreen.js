@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
+import { connect } from 'react-redux'
+
+
 import CartActions from '../Redux/CartRedux'
 import CartItemList from '../Components/CartItemList'
-import { connect } from 'react-redux'
-import { View, Button, Divider, ScrollView, Text } from '@shoutem/ui'
+import styles from './Styles/ItemDetailsScreenStyles'
 
 class CartScreen extends Component {
   componentDidMount () {
@@ -11,17 +14,14 @@ class CartScreen extends Component {
 
   render () {
     return (
-      <View>
+      <View style={styles.mainContainer}>
         <ScrollView>
           <CartItemList />
-          <Divider styleName="line" />
-          <Button onPress={this.props.clearCart.bind(this)}>
-            <Text>Clear Cart</Text>
-          </Button>
-          <Divider styleName="line" />
-          <Button onPress={this.props.placeOrder.bind(this)}>
-            <Text>Reserve Items</Text>
-          </Button>
+          <View style={styles.centered}>
+            <TouchableOpacity style={styles.button} onPress={this.props.placeOrder.bind(this)}>
+              <Text style={styles.buttonText}>RESERVE ITEMS</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       </View>
     )

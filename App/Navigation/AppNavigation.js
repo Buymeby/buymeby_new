@@ -125,21 +125,28 @@ const OrdersStack = StackNavigator({
   OrdersScreen: {
     screen: OrdersScreen,
     navigationOptions: ({navigation}) => ({
-    headerTitle: "Orders",
-    headerRight: <TouchableOpacity onPress={() => { navigation.navigate('CartScreen') }}>
-                  <Icon name="shopping-cart" size={25} style={styles.headerIconRight} />
-                </TouchableOpacity>
+      headerTitle: "Orders",
+      headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
+                    <Icon name="bars" size={25} style={styles.headerIconLeft} />
+                  </TouchableOpacity>,
+      headerRight: <TouchableOpacity onPress={() => { navigation.navigate('CartScreen') }}>
+                    <Icon name="shopping-cart" size={25} style={styles.headerIconRight} />
+                  </TouchableOpacity>
     })
   },
-  OrderDetailsScreen: { screen: OrderDetailsScreen }
+  OrderDetailsScreen: {
+    screen: OrderDetailsScreen,
+    navigationOptions: ({navigation}) => ({
+      headerTitle: "Order"
+    })
+  }
 }, {
   headerMode: 'float',
   navigationOptions: ({navigation}) => ({
     gesturesEnabled: false,
-    headerTitle: 'Buymeby',
-    headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
-                  <Icon name="bars" size={25} style={styles.headerIconLeft} />
-                </TouchableOpacity>
+    headerStyle: styles.header,
+    headerBackTitle: null,
+    headerTintColor: Colors.secondary
   })
 })
 
