@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
+import { ScrollView } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import {
   Divider,
-  ScrollView,
   TouchableOpacity,
   Image,
   Subtitle,
@@ -17,6 +17,7 @@ import {
 import OrderActions from '../Redux/OrderRedux'
 import Chevron from '../Components/Chevron'
 import LoadingSpinner from '../Components/LoadingSpinner'
+import styles from './Styles/ItemDetailsScreenStyles'
 
 class OrdersScreen extends Component {
   componentDidMount() {
@@ -29,7 +30,9 @@ class OrdersScreen extends Component {
 
     if (fetching) {
       return (
-        <LoadingSpinner />
+        <ScrollView style={styles.mainContainer}>
+          <LoadingSpinner />
+        </ScrollView>
       )
     }
 

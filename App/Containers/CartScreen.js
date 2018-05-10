@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 
-
 import CartActions from '../Redux/CartRedux'
 import CartItemList from '../Components/CartItemList'
+import LoadingSpinner from '../Components/LoadingSpinner'
 import styles from './Styles/ItemDetailsScreenStyles'
 
 class CartScreen extends Component {
@@ -13,6 +13,16 @@ class CartScreen extends Component {
   }
 
   render () {
+    const fetching = this.props.fetching
+
+    if (fetching) {
+      return (
+        <View style={styles.mainContainer}>
+          <LoadingSpinner />
+        </View>
+      )
+    }
+
     return (
       <View style={styles.mainContainer}>
         <ScrollView>
@@ -28,10 +38,16 @@ class CartScreen extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    fetching: state.cart.fetching
+  }
+}
+
 const mapDispatchToProps = (dispatch) => ({
   populateCart: () => dispatch(CartActions.populate()),
   clearCart: () => dispatch(CartActions.clear()),
   placeOrder: () => dispatch(CartActions.order())
 })
 
-export default connect(null, mapDispatchToProps)(CartScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(CartScreen)

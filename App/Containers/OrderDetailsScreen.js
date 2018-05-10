@@ -1,13 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { ScrollView } from 'react-native'
+import { Title, View, Button, Divider, Text, Row, Image, Subtitle, Caption } from '@shoutem/ui'
+
 import CartActions from '../Redux/CartRedux'
-import { Title, View, Button, Divider, ScrollView, Text, Row, Image, Subtitle, Caption } from '@shoutem/ui'
+import styles from './Styles/ScreenStyles'
+import LoadingSpinner from '../Components/LoadingSpinner'
 
 class OrderDetailsScreen extends Component {
   render () {
-    const order_details = this.props.order_details;
-    if (!order_details) {
-      return null
+    const fetching = this.props.fetching
+    const order_details = this.props.order_details
+
+    if (fetching) {
+      return (
+        <View style={styles.mainContainer}>
+          <LoadingSpinner />
+        </View>
+      )
     }
 
     return (
@@ -56,7 +66,8 @@ class OrderDetailsScreen extends Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    order_details: state.order.selected_order
+    order_details: state.order.selected_order,
+    fetching: state.order.fetching
   }
 }
 

@@ -23,12 +23,11 @@ import VendorActions from '../Redux/VendorRedux'
 import CartActions from '../Redux/CartRedux'
 import Chevron from '../Components/Chevron'
 
-
 class CartItemList extends React.Component {
 
   render () {
-    const populated_cart = this.props.populated_cart;
-    const cart = this.props.cart;
+    const populated_cart = this.props.populated_cart
+    const cart = this.props.cart
 
     if (!cart || !populated_cart || this.props.emptyCart) {
       return (

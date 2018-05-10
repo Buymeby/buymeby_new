@@ -20,7 +20,7 @@ export function * getOrderList (api) {
 
   if (response.ok) {
     const orders = path(['data'], response)
-    yield put(OrderActions.orderListSuccess(orders))
+    yield put(OrderActions.orderListSuccess(orders.reverse()))
   } else {
     yield put(OrderActions.orderListFailure())
     return

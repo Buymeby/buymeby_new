@@ -33,7 +33,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   cart: null,
   cart_count: null,
-  performing: false,
+  fetching: false,
   error: false,
   populated_cart: null
 })
@@ -41,7 +41,7 @@ export const INITIAL_STATE = Immutable({
 /* ------------- Reducers ------------- */
 
 export const initialize = (state, action) =>
-  state.merge({ performing: true })
+  state.merge({ fetching: true })
 
 export const initializeSuccess = (state, action) => {
   const { cart, cart_count } = action
@@ -49,10 +49,10 @@ export const initializeSuccess = (state, action) => {
 }
 
 export const initializeFailure = (state) =>
-  state.merge({ performing: false, error: true })
+  state.merge({ fetching: false, error: true })
 
 export const add = (state, action) =>
-  state.merge({ performing: true })
+  state.merge({ fetching: true })
 
 export const addSuccess = (state, action) => {
   const { cart, cart_count } = action
@@ -60,10 +60,10 @@ export const addSuccess = (state, action) => {
 }
 
 export const addFailure = (state) =>
-  state.merge({ performing: false, error: true })
+  state.merge({ fetching: false, error: true })
 
 export const remove = (state, action) =>
-  state.merge({ performing: true })
+  state.merge({ fetching: true })
 
 export const removeSuccess = (state, action) => {
   const { cart, cart_count } = action
@@ -71,10 +71,10 @@ export const removeSuccess = (state, action) => {
 }
 
 export const removeFailure = (state) =>
-  state.merge({ performing: false, error: true })
+  state.merge({ fetching: false, error: true })
 
 export const clear = (state, action) =>
-  state.merge({ performing: true })
+  state.merge({ fetching: true })
 
 export const clearSuccess = (state, action) => {
   const { cart, cart_count } = action
@@ -82,10 +82,10 @@ export const clearSuccess = (state, action) => {
 }
 
 export const clearFailure = (state) =>
-  state.merge({ performing: false, error: true })
+  state.merge({ fetching: false, error: true })
 
 export const populate = (state, action) =>
-  state.merge({ performing: true })
+  state.merge({ fetching: true })
 
 export const populateSuccess = (state, action) => {
   const { populated_cart } = action
@@ -93,21 +93,21 @@ export const populateSuccess = (state, action) => {
 }
 
 export const populateFailure = (state) =>
-  state.merge({ performing: false, error: true })
+  state.merge({ fetching: false, error: true })
 
 export const order = (state, action) =>
-  state.merge({ performing: true })
+  state.merge({ fetching: true })
 
 export const orderSuccess = (state, action) => {
   return state.merge({ fetching: false, error: null})
 }
 
 export const orderFailure = (state) =>
-  state.merge({ performing: false, error: true })
+  state.merge({ fetching: false, error: true })
 
 
 export const emptyCart = (state) =>
-  state.merge({ performing: false, emptyCart: true })
+  state.merge({ fetching: false, emptyCart: true })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
