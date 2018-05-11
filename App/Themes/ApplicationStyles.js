@@ -11,6 +11,10 @@ const ApplicationStyles = {
       flex: 1,
       backgroundColor: Colors.snow
     },
+    secondaryContainer: {
+      flex: 1,
+      backgroundColor: Colors.splash
+    },
     backgroundImage: {
       position: 'absolute',
       top: 0,
@@ -44,10 +48,26 @@ const ApplicationStyles = {
       marginBottom: Metrics.smallMargin,
       marginHorizontal: Metrics.smallMargin
     },
+    subText: {
+      ...Fonts.style.normal,
+      color: Colors.secondary,
+      textAlign: 'center'
+    },
     titleText: {
       ...Fonts.style.h2,
       fontSize: 14,
       color: Colors.text
+    },
+    logoContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginHorizontal: Metrics.baseMargin,
+      marginVertical: -40
+    },
+    logo: {
+      width: '100%',
+      resizeMode: 'contain'
     }
   },
   darkLabelContainer: {

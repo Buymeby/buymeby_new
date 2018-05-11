@@ -1,6 +1,7 @@
 import { call, put } from 'redux-saga/effects'
 import { AsyncStorage } from 'react-native'
 import { NavigationActions } from 'react-navigation'
+import Toast from 'react-native-simple-toast'
 
 import AuthActions from '../Redux/AuthRedux'
 import StartupActions from '../Redux/StartupRedux'
@@ -54,9 +55,11 @@ export function * login (api, action) {
     setAuthHeaders(response.headers, api)
     persistAuthHeadersInDeviceStorage(response.headers)
     yield put(AuthActions.loginSuccess(response.data))
+    Toast.show('Welcome back!');
     yield put(NavigationActions.navigate({ routeName: 'DrawerNav'}))
   } else {
     yield put(AuthActions.loginFailure())
+    Toast.show(response.data.errors[0] || response.data.errors.full_messages[0]);
   }
 }
 
@@ -80,9 +83,11 @@ export function * register (api, action) {
     setAuthHeaders(response.headers, api)
     persistAuthHeadersInDeviceStorage(response.headers)
     yield put(AuthActions.registrationSuccess(response.data))
+    Toast.show('Welcome to Buymeby!');
     yield put(NavigationActions.navigate({ routeName: 'DrawerNav'}))
   } else {
     yield put(AuthActions.registrationFailure())
+    Toast.show(response.data.errors[0] || response.data.errors.full_messages[0]);
   }
 }
 

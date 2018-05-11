@@ -1,5 +1,4 @@
 import React from 'react'
-import { List, ListItem } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 import {

@@ -17,11 +17,15 @@ class LoginScreen extends Component {
 
   render () {
     return (
-      <View style={styles.mainContainer}>
+      <View style={styles.secondaryContainer}>
         <ScrollView style={styles.container}>
+          <View style={styles.logoContainer}>
+            <Image source={require('../Images/logo.png')} style={styles.logo} />
+          </View>
           <LoginForm onSubmit={this.handleLoginSubmit} />
           <TouchableOpacity onPress={this.props.openRegistrationScreen.bind(this)}>
-            <Text style={styles.sectionText}>Not a member? Register Here</Text>
+            <Text style={styles.subText}>Not a member?</Text>
+            <Text style={styles.subText}>Click here to Register</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>
