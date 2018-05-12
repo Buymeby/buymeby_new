@@ -1,9 +1,10 @@
 import React from 'react'
 
-import { Text, Animated, Easing, TouchableOpacity, Image } from 'react-native'
+import { Text, Animated, Easing, TouchableOpacity, Image, View } from 'react-native'
 import { StackNavigator, DrawerNavigator, TabNavigator, TabBarTop } from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import SideMenu from '../Components/SideMenu'
 import SplashScreen from '../Containers/SplashScreen'
 import RegistrationScreen from '../Containers/RegistrationScreen'
 import LoginScreen from '../Containers/LoginScreen'
@@ -166,12 +167,13 @@ const ProfileStack = StackNavigator({
 })
 
 const DrawerNav = DrawerNavigator({
-  PrimaryNav: { screen: PrimaryNav, navigationOptions: {title: 'Discover'}},
+  PrimaryNav: { screen: PrimaryNav, navigationOptions: {title: <View><Icon name="globe" size={16} style={styles.menuIcon}/><Text style={styles.menuText}>Discover</Text></View>}},
   Profile: { screen: ProfileStack, navigationOptions: {title: 'Profile'} },
   Orders: { screen: OrdersStack, navigationOptions: {title: 'Orders'} },
   Register: { screen: RegistrationScreen, navigationOptions: {title: 'Logout'} },
 }, {
-  gesturesEnabled: false
+  gesturesEnabled: false,
+  contentComponent: SideMenu
 })
 
 const RootNav = StackNavigator({

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Colors } from '../../Themes/'
+import { Colors, Metrics } from '../../Themes/'
 
 export default StyleSheet.create({
   header: {
@@ -26,5 +26,21 @@ export default StyleSheet.create({
   headerIconRight: {
     paddingRight: 10,
     color: Colors.secondary
+  },
+  sideMenuContainer: {
+    marginVertical: Metrics.section,
+    padding: Metrics.baseMargin
+  },
+  sideMenuItem: {
+    flex:1,
+    flexDirection:'row',
+    paddingVertical: Metrics.baseMargin
+  },
+  menuIcon: {
+    paddingRight: Metrics.baseMargin,
+    color: Colors.secondary
+  },
+  menuText: {
+    color: Colors.coal
   }
 })
