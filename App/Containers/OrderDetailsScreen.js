@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { ScrollView } from 'react-native'
 import { Title, View, Button, Divider, Text, Row, Image, Subtitle, Caption } from '@shoutem/ui'
 
-import CartActions from '../Redux/CartRedux'
+import OrderActions from '../Redux/OrderRedux'
 import styles from './Styles/ScreenStyles'
 import LoadingSpinner from '../Components/LoadingSpinner'
+import CenteredButton from '../Components/CenteredButton'
 
 class OrderDetailsScreen extends Component {
   render () {
@@ -30,31 +31,34 @@ class OrderDetailsScreen extends Component {
                 <View>
                   <Row styleName="small">
                     <View styleName="horizontal space-between">
-                      <Title>{vendor_order.name}</Title>
+                      <Title>{vendor_order.vendor_name}</Title>
                       <Caption styleName="right">{vendor_order.status}</Caption>
                     </View>
                   </Row>
-                    {
-                      vendor_order.order_details.map((item, j) => (
-                        <Row key={vendor_order.id + '-' + item.id}>
-                          <Image
-                            styleName="small rounded-corners"
-                            source={{ uri: item.image_file_src }}
-                          />
-                          <View styleName="vertical stretch space-between">
-                            <Subtitle>{item.name}</Subtitle>
-                            <View styleName="horizontal">
-                              <Caption styleName="line-through md-gutter-right">${item.price}</Caption>
-                            </View>
-                            <View styleName="horizontal">
-                              <Caption>Quantity: {item.quantity} | </Caption>
-                              <Caption>Total: ${item.total_cost}</Caption>
-                            </View>
+                  {
+                    vendor_order.order_details.map((item, j) => (
+                      <Row key={vendor_order.id + '-' + item.id}>
+                        <Image
+                          styleName="small rounded-corners"
+                          source={{ uri: item.image_file_src }}
+                        />
+                        <View styleName="vertical stretch space-between">
+                          <Subtitle>{item.name}</Subtitle>
+                          <View styleName="horizontal">
+                            <Subtitle styleName="md-gutter-right">${item.total_cost}</Subtitle>
                           </View>
-                        </Row>
-                      ))
-                    }
+                          <View styleName="horizontal">
+                            <Caption>Quantity: {item.quantity} x </Caption>
+                            <Caption>${item.total_cost}</Caption>
+                          </View>
+                        </View>
+                      </Row>
+                    ))
+                  }
                 </View>
+                {
+                  vendor_order.status == 'RESERVED' && (<CenteredButton onPress={this.props.cancelOrder.bind(this, vendor_order.id)} text={'CANCEL'}/>)
+                }
               </View>
             ))
           }
@@ -72,7 +76,7 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  completeOrder: () => dispatch({ type: 'NavigateBack' })
+  cancelOrder: (vendor_order_id) => dispatch(OrderActions.orderCancel(vendor_order_id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderDetailsScreen)

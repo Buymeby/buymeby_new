@@ -23,5 +23,11 @@ export default StyleSheet.create({
     color: Colors.snow,
     fontSize: Fonts.size.small,
     fontFamily: Fonts.type.bold
+  },
+  cautionText: {
+    margin: 10,
+    textAlign: 'center',
+    color: Colors.bloodOrange,
+    fontSize: Fonts.size.small
   }
 })

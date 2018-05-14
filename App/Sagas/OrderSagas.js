@@ -1,6 +1,7 @@
 import { call, put } from 'redux-saga/effects'
 import OrderActions from '../Redux/OrderRedux'
 import { path } from 'ramda'
+import Toast from 'react-native-simple-toast'
 
 export function * getOrder (api, action) {
   const { order_id } = action
@@ -24,5 +25,18 @@ export function * getOrderList (api) {
   } else {
     yield put(OrderActions.orderListFailure())
     return
+  }
+}
+
+export function * cancelOrder (api, action) {
+  const { vendor_order_id } = action
+  const response = yield call(api.cancelOrder, vendor_order_id)
+
+  if (response.ok) {
+    yield put(OrderActions.orderSuccess(response.data))
+    Toast.show('Order cancelled!');
+  } else {
+    yield put(OrderActions.orderFailure())
+    Toast.show('There was an issue cancelling your order, please try again.');
   }
 }

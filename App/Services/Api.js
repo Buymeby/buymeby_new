@@ -1,8 +1,8 @@
 import apisauce from 'apisauce'
 
 // const create = (baseURL = 'http://10.0.2.2:3000/api/') => {
-// const create = (baseURL = 'http://localhost:3000/api/') => {
-const create = (baseURL = 'https://buymeby-dev.cfapps.io/api/') => {
+const create = (baseURL = 'http://localhost:3000/api/') => {
+// const create = (baseURL = 'https://buymeby-dev.cfapps.io/api/') => {
 
   const api = apisauce.create({
     baseURL,
@@ -21,6 +21,7 @@ const create = (baseURL = 'https://buymeby-dev.cfapps.io/api/') => {
 
   const getOrders = () => api.get('user_orders')
   const getOrder = (order_id) => api.get('user_orders/' + order_id)
+  const cancelOrder = (vendor_order_id) => api.put('user_orders/' + vendor_order_id + '/cancel')
 
   const populateCart = (cart) => api.post('populate_cart', cart)
   const placeOrder = (cart) => api.post('place_order', cart)
@@ -43,6 +44,7 @@ const create = (baseURL = 'https://buymeby-dev.cfapps.io/api/') => {
     verifyToken,
     populateCart,
     placeOrder,
+    cancelOrder,
     config
   }
 }

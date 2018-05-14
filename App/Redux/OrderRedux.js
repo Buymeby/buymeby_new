@@ -6,6 +6,7 @@ import Immutable from 'seamless-immutable'
 
 const { Types, Creators } = createActions({
   orderRequest: ['order_id'],
+  orderCancel: ['vendor_order_id'],
   orderSuccess: ['order'],
   orderFailure: null,
   orderListRequest: null,
@@ -31,6 +32,9 @@ export const INITIAL_STATE = Immutable({
 export const request = (state) =>
   state.merge({ fetching: true, payload: null })
 
+export const cancel = (state) =>
+  state.merge({ fetching: true })
+
 export const success = (state, action) => {
   const { order } = action
   return state.merge({ fetching: false, error: null, selected_order: order })
@@ -54,6 +58,7 @@ export const listFailure = state =>
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.ORDER_REQUEST]: request,
+  [Types.ORDER_CANCEL]: cancel,
   [Types.ORDER_SUCCESS]: success,
   [Types.ORDER_FAILURE]: failure,
   [Types.ORDER_LIST_REQUEST]: listRequest,
