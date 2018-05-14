@@ -57,7 +57,9 @@ export function * populateCart (api, action) {
 }
 
 export function * addToCart (action) {
-  const { vendor_id, item_id, quantity } = action
+  const { vendor, item, quantity } = action
+  const vendor_id = vendor.id
+  const item_id = item.id
 
   let initial_cart = JSON.parse(yield call([AsyncStorage, 'getItem'], 'cart'))
 
@@ -73,21 +75,36 @@ export function * addToCart (action) {
 
   if (!initial_cart[vendor_id][item_id]) {
     initial_cart[vendor_id][item_id] = quantity
-  } else {
+
+    yield call([AsyncStorage, 'setItem'], 'cart', JSON.stringify(initial_cart))
+    let updated_cart = JSON.parse(yield call([AsyncStorage, 'getItem'], 'cart'))
+    let updated_cart_count = countCartItems(updated_cart)
+
+    if (initial_cart_count + quantity == updated_cart_count) {
+      yield put(CartActions.addSuccess(updated_cart, updated_cart_count))
+      Toast.show('Item added to cart');
+      yield put(NavigationActions.back())
+    } else {
+      Toast.show('Add to cart failed, please try again');
+      yield put(CartActions.addFailure())
+    }
+  } else if (initial_cart[vendor_id][item_id] + quantity < item.quantity) {
     initial_cart[vendor_id][item_id] += quantity
-  }
 
-  yield call([AsyncStorage, 'setItem'], 'cart', JSON.stringify(initial_cart))
-  let updated_cart = JSON.parse(yield call([AsyncStorage, 'getItem'], 'cart'))
-  let updated_cart_count = countCartItems(updated_cart)
+    yield call([AsyncStorage, 'setItem'], 'cart', JSON.stringify(initial_cart))
+    let updated_cart = JSON.parse(yield call([AsyncStorage, 'getItem'], 'cart'))
+    let updated_cart_count = countCartItems(updated_cart)
 
-  if (initial_cart_count + quantity == updated_cart_count) {
-    yield put(CartActions.addSuccess(updated_cart, updated_cart_count))
-    Toast.show('Item added to cart');
-    yield put(NavigationActions.back())
+    if (initial_cart_count + quantity == updated_cart_count) {
+      yield put(CartActions.addSuccess(updated_cart, updated_cart_count))
+      Toast.show('Item added to cart');
+      yield put(NavigationActions.back())
+    } else {
+      Toast.show('Add to cart failed, please try again');
+      yield put(CartActions.addFailure())
+    }
   } else {
-    Toast.show('Add to cart failed, please try again');
-    yield put(CartActions.addFailure())
+    Toast.show('You have exceeded what is in stock, please adjust your quantity to be below ' + (item.quantity - initial_cart[vendor_id][item_id]) )
   }
 }
 

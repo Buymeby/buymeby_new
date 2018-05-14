@@ -55,9 +55,14 @@ class CartItemList extends React.Component {
                   <View styleName="vertical stretch space-between">
                     <Subtitle>{item.name}</Subtitle>
                     <View styleName="horizontal">
-                      <Subtitle styleName="md-gutter-right">${item.price}</Subtitle>
+                      <Subtitle styleName="md-gutter-right">${item.total}</Subtitle>
                     </View>
-                    <Caption>Quantity: {cart[vendor.id][item.id]}</Caption>
+                    {
+                      cart[vendor.id][item.id] > item.quantity ?
+                        <Caption>Not enough stock! Please re-add this item before reserving</Caption>
+                        :
+                        <Caption>Quantity: {cart[vendor.id][item.id]} x ${item.price}/{item.unit}</Caption>
+                    }
                   </View>
                   <Button styleName="right-icon" onPress={this.props.removeFromCart.bind(this, vendor.id, item.id)}><Icon name="close"/></Button>
                 </Row>

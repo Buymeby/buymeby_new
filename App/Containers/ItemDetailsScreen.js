@@ -54,7 +54,7 @@ class ItemDetailsScreen extends Component {
         			minQuantity={1}
         			maxQuantity={item.quantity}
               onChange={this.setQuantity} />
-            <TouchableOpacity style={styles.button} onPress={this.props.addToCart.bind(this, vendor.id, item.id, selectedQuantity)}>
+            <TouchableOpacity style={styles.button} onPress={this.props.addToCart.bind(this, vendor, item, selectedQuantity)}>
               <Text style={styles.buttonText}>ADD TO CART</Text>
             </TouchableOpacity>
           </View>
@@ -72,8 +72,8 @@ const mapStateToProps = (state, props) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addToCart: (vendor_id, item_id, quantity) => {
-    dispatch(CartActions.add(vendor_id, item_id, quantity))
+  addToCart: (vendor, item, quantity) => {
+    dispatch(CartActions.add(vendor, item, quantity))
   }
 })
 

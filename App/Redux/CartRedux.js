@@ -7,7 +7,7 @@ const { Types, Creators } = createActions({
   initialize: null,
   initializeSuccess: ['cart', 'cart_count'],
   initializeFailure: null,
-  add: ['vendor_id', 'item_id', 'quantity'],
+  add: ['vendor', 'item', 'quantity'],
   addSuccess: ['cart', 'cart_count'],
   addFailure: null,
   remove: ['vendor_id', 'item_id'],
