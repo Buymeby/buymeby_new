@@ -28,6 +28,7 @@ class CartScreen extends Component {
         <ScrollView>
           <CartItemList />
           <View style={styles.centered}>
+            <Text style={styles.cautionText}>Before reserving these items, please make sure that you will be able to pick them up by the end of the day before closing!</Text>
             <TouchableOpacity style={styles.button} onPress={this.props.placeOrder.bind(this)}>
               <Text style={styles.buttonText}>RESERVE ITEMS</Text>
             </TouchableOpacity>
