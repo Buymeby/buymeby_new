@@ -28,9 +28,11 @@ class CartItemList extends React.Component {
   render () {
     const populated_cart = this.props.populated_cart
     const cart = this.props.cart
-    const total = this.props.populated_cart.reduce((sum, curr) => { return sum + parseFloat(curr.total) }, 0)
-    console.tron.log(populated_cart)
-    console.tron.log(total)
+    const total = populated_cart && populated_cart.reduce(
+      function(sum, curr) {
+        return sum + parseFloat(curr.total)
+      }, 0.0
+    )
 
     if (!cart || !populated_cart || this.props.emptyCart) {
       return (
@@ -81,7 +83,7 @@ class CartItemList extends React.Component {
         <Row>
           <View styleName="horizontal space-between">
             <Title>Total</Title>
-            <Title styleName="right">{'$' + total}</Title>
+            <Title styleName="right">{'$' + total.toFixed(2)}</Title>
           </View>
         </Row>
         <Divider styleName="line" />
