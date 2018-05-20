@@ -41,6 +41,7 @@ export default StyleSheet.create({
     color: Colors.secondary
   },
   menuText: {
-    color: Colors.coal
+    color: Colors.coal,
+    fontSize: 18
   }
 })

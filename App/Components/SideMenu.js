@@ -13,25 +13,19 @@ class SideMenu extends Component {
         <ScrollView>
           <TouchableOpacity onPress={this.props.navigateToScreen.bind(this, 'DiscoveryTab')}>
             <View style={styles.sideMenuItem}>
-              <Icon name="globe" size={16} style={styles.menuIcon}/>
+              <Icon name="globe" size={20} style={styles.menuIcon}/>
               <Text style={styles.menuText}>Discover</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.props.navigateToScreen.bind(this, 'OrdersScreen')}>
             <View  style={styles.sideMenuItem}>
-              <Icon name="history" size={16} style={styles.menuIcon}/>
+              <Icon name="history" size={20} style={styles.menuIcon}/>
               <Text style={styles.menuText}>Order History</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.props.navigateToScreen.bind(this, 'ProfileScreen')}>
-            <View  style={styles.sideMenuItem}>
-              <Icon name="user-circle-o" size={16} style={styles.menuIcon}/>
-              <Text style={styles.menuText}>Profile</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.props.navigateToScreen.bind(this, 'RegistrationScreen')}>
+          <TouchableOpacity onPress={this.props.navigateToScreen.bind(this, 'HelpScreen')}>
             <View style={styles.sideMenuItem}>
-              <Icon name="question-circle-o" size={16} style={styles.menuIcon}/>
+              <Icon name="question-circle-o" size={20} style={styles.menuIcon}/>
               <Text style={styles.menuText}>Help and Support</Text>
             </View>
           </TouchableOpacity>

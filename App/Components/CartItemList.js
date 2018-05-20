@@ -15,7 +15,8 @@ import {
   Button,
   Icon,
   Title,
-  Text
+  Text,
+  Divider
 } from '@shoutem/ui';
 
 import VendorActions from '../Redux/VendorRedux'
@@ -27,6 +28,9 @@ class CartItemList extends React.Component {
   render () {
     const populated_cart = this.props.populated_cart
     const cart = this.props.cart
+    const total = this.props.populated_cart.reduce((sum, curr) => { return sum + parseFloat(curr.total) }, 0)
+    console.tron.log(populated_cart)
+    console.tron.log(total)
 
     if (!cart || !populated_cart || this.props.emptyCart) {
       return (
@@ -37,39 +41,51 @@ class CartItemList extends React.Component {
     }
 
     return (
-      populated_cart.map((vendor, i) => (
-        <View key={vendor.id}>
-          <TouchableOpacity onPress={this.props.navigateVendor.bind(this, vendor)}>
-            <Row styleName="small">
-              <Title>{vendor.name}</Title>
-              <Chevron />
-            </Row>
-          </TouchableOpacity>
-            {
-              vendor.items.map((item, j) => (
-                <Row key={vendor.id + '-' + item.id}>
-                  <Image
-                    styleName="small rounded-corners"
-                    source={{ uri: item.image_file_src }}
-                  />
-                  <View styleName="vertical stretch space-between">
-                    <Subtitle>{item.name}</Subtitle>
-                    <View styleName="horizontal">
-                      <Subtitle styleName="md-gutter-right">${item.total}</Subtitle>
-                    </View>
-                    {
-                      cart[vendor.id][item.id] > item.quantity ?
-                        <Caption>Not enough stock! Please re-add this item before reserving</Caption>
-                        :
-                        <Caption>Quantity: {cart[vendor.id][item.id]} x ${item.price}/{item.unit}</Caption>
-                    }
-                  </View>
-                  <Button styleName="right-icon" onPress={this.props.removeFromCart.bind(this, vendor.id, item.id)}><Icon name="close"/></Button>
+      <View>
+        {
+          populated_cart.map((vendor, i) => (
+            <View key={vendor.id}>
+              <TouchableOpacity onPress={this.props.navigateVendor.bind(this, vendor)}>
+                <Row styleName="small">
+                  <Title>{vendor.name}</Title>
+                  <Chevron />
                 </Row>
-              ))
-            }
-        </View>
-      ))
+              </TouchableOpacity>
+              {
+                vendor.items.map((item, j) => (
+                  <Row key={vendor.id + '-' + item.id}>
+                    <Image
+                      styleName="small rounded-corners"
+                      source={{ uri: item.image_file_src }}
+                    />
+                    <View styleName="vertical stretch space-between">
+                      <Subtitle>{item.name}</Subtitle>
+                      <View styleName="horizontal">
+                        <Subtitle styleName="md-gutter-right">${item.total}</Subtitle>
+                      </View>
+                      {
+                        cart[vendor.id][item.id] > item.quantity ?
+                          <Caption>Not enough stock! Please re-add this item before reserving</Caption>
+                        :
+                          <Caption>Quantity: {cart[vendor.id][item.id]} x ${item.price}/{item.unit}</Caption>
+                      }
+                    </View>
+                    <Button styleName="right-icon" onPress={this.props.removeFromCart.bind(this, vendor.id, item.id)}><Icon name="close"/></Button>
+                  </Row>
+                ))
+              }
+            </View>
+          ))
+        }
+        <Divider styleName="line" />
+        <Row>
+          <View styleName="horizontal space-between">
+            <Title>Total</Title>
+            <Title styleName="right">{'$' + total}</Title>
+          </View>
+        </Row>
+        <Divider styleName="line" />
+      </View>
     )
   }
 }

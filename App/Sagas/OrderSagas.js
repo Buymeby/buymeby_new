@@ -24,7 +24,6 @@ export function * getOrderList (api) {
     yield put(OrderActions.orderListSuccess(orders.reverse()))
   } else {
     yield put(OrderActions.orderListFailure())
-    return
   }
 }
 

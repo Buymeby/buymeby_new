@@ -27,7 +27,6 @@ class OrderDetailsScreen extends Component {
           {
             order_details.vendor_orders.map((vendor_order, i) => (
               <View key={vendor_order.id}>
-                <Divider styleName="line" />
                 <View>
                   <Row styleName="small">
                     <View styleName="horizontal space-between">
@@ -55,6 +54,14 @@ class OrderDetailsScreen extends Component {
                       </Row>
                     ))
                   }
+                  <Divider styleName="line" />
+                  <Row>
+                    <View styleName="horizontal space-between">
+                      <Title>Total</Title>
+                      <Title styleName="right">{'$' + vendor_order.total_amount}</Title>
+                    </View>
+                  </Row>
+                  <Divider styleName="line" />
                 </View>
                 {
                   vendor_order.status == 'RESERVED' && (<CenteredButton onPress={this.props.cancelOrder.bind(this, vendor_order.id)} text={'CANCEL'}/>)

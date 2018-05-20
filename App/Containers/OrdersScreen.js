@@ -51,7 +51,7 @@ class OrdersScreen extends Component {
                   <Subtitle>{order.name}</Subtitle>
                   <Caption>Total: {order.total_description}</Caption>
                   <View styleName="horizontal">
-                    <Caption>0.8 miles away | </Caption>
+                    <Caption>{order.status_description} | </Caption>
                     <Caption>{order.created_description}</Caption>
                   </View>
                 </View>

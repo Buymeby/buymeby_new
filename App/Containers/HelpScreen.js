@@ -5,13 +5,14 @@ import { connect } from 'react-redux'
 // Styles
 import styles from './Styles/ScreenStyles'
 
-class ProfileScreen extends Component {
+class HelpScreen extends Component {
   render () {
     return (
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>
-          <Text style={styles.sectionText}>
-          {`Your Profile Here`}</Text>
+          <Text>
+            {`Help and Support`}
+          </Text>
         </ScrollView>
       </View>
     )
@@ -25,4 +26,4 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(HelpScreen)

@@ -27,12 +27,15 @@ class CartScreen extends Component {
       <View style={styles.mainContainer}>
         <ScrollView>
           <CartItemList />
-          <View style={styles.centered}>
-            <Text style={styles.cautionText}>Before reserving these items, please make sure that you will be able to pick them up by the end of the day before closing!</Text>
-            <TouchableOpacity style={styles.button} onPress={this.props.placeOrder.bind(this)}>
-              <Text style={styles.buttonText}>RESERVE ITEMS</Text>
-            </TouchableOpacity>
-          </View>
+            {
+              !(!this.props.cart || !this.props.populated_cart || this.props.emptyCart) &&
+              <View style={styles.centered}>
+                <Text style={styles.cautionText}>Before reserving these items, please make sure that you will be able to pick them up by the end of the day before closing!</Text>
+                <TouchableOpacity style={styles.button} onPress={this.props.placeOrder.bind(this)}>
+                  <Text style={styles.buttonText}>RESERVE ITEMS</Text>
+                </TouchableOpacity>
+              </View>
+            }
         </ScrollView>
       </View>
     )
@@ -41,6 +44,9 @@ class CartScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    populated_cart: state.cart.populated_cart,
+    cart: state.cart.cart,
+    emptyCart: state.cart.emptyCart,
     fetching: state.cart.fetching
   }
 }

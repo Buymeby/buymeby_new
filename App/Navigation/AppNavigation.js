@@ -16,7 +16,7 @@ import VendorDetailsScreen from '../Containers/VendorDetailsScreen'
 import VendorStoreScreen from '../Containers/VendorStoreScreen'
 import OrdersScreen from '../Containers/OrdersScreen'
 import OrderDetailsScreen from '../Containers/OrderDetailsScreen'
-import ProfileScreen from '../Containers/ProfileScreen'
+import HelpScreen from '../Containers/HelpScreen'
 import styles from './Styles/NavigationStyles'
 import { Colors } from '../Themes/'
 
@@ -152,11 +152,11 @@ const OrdersStack = StackNavigator({
 })
 
 const ProfileStack = StackNavigator({
-  ProfileScreen: { screen: ProfileScreen }
+  HelpScreen: { screen: HelpScreen }
 }, {
   headerMode: 'float',
   navigationOptions: ({navigation}) => ({
-    headerTitle: "Profile",
+    headerTitle: "Help & Support",
     headerLeft: <TouchableOpacity onPress={() => { navigation.navigate('DrawerToggle') }}>
                    <Icon name="bars" size={20} style={styles.headerIconLeft} />
                  </TouchableOpacity>,
