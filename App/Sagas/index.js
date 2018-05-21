@@ -14,7 +14,7 @@ import { CartTypes } from '../Redux/CartRedux'
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
-import { getVendor, getVendorList } from './VendorSagas'
+import { getVendor, getVendorList, blockVendor } from './VendorSagas'
 import { getOrder, getOrderList, cancelOrder } from './OrderSagas'
 import { register, login, verifyToken } from './AuthSagas'
 import { initializeCart, addToCart, removeFromCart, clearCart, populateCart, placeOrder } from './CartSagas'
@@ -44,6 +44,8 @@ export default function * root () {
 
     takeLatest(VendorTypes.VENDOR_LIST_REQUEST, getVendorList, api),
     takeLatest(VendorTypes.VENDOR_REQUEST, getVendor, api),
+    takeLatest(VendorTypes.VENDOR_BLOCK, blockVendor, api),
+
     takeLatest(OrderTypes.ORDER_LIST_REQUEST, getOrderList, api),
     takeLatest(OrderTypes.ORDER_REQUEST, getOrder, api),
     takeLatest(OrderTypes.ORDER_CANCEL, cancelOrder, api)

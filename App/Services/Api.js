@@ -19,6 +19,7 @@ const create = (baseURL = 'https://buymeby-prod.cfapps.io/api/') => {
 
   const getVendors = () => api.get('vendors')
   const getVendor = (vendor) => api.get('vendors/' + vendor.id)
+  const blockVendor = (vendor) => api.post('vendors/' + vendor.id + '/block')
 
   const getOrders = () => api.get('user_orders')
   const getOrder = (order_id) => api.get('user_orders/' + order_id)
@@ -38,6 +39,7 @@ const create = (baseURL = 'https://buymeby-prod.cfapps.io/api/') => {
     getUser,
     getVendors,
     getVendor,
+    blockVendor,
     getOrders,
     getOrder,
     registerUser,

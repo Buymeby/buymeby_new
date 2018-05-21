@@ -29,5 +29,13 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: Colors.bloodOrange,
     fontSize: Fonts.size.small
+  },
+  avatar: {
+    borderRadius: 75,
+    width: 150,
+    height: 150
+  },
+  infoText: {
+    color: Colors.charcoal
   }
 })

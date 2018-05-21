@@ -11,7 +11,9 @@ const { Types, Creators } = createActions({
   vendorListRequest: null,
   vendorListSuccess: ['vendors'],
   vendorListFailure: null,
-  calloutVendor: ['calloutVendor']
+  calloutVendor: ['calloutVendor'],
+  vendorBlock: ['vendor'],
+  blockSuccess: null
 })
 
 export const VendorTypes = Types
@@ -71,6 +73,12 @@ export const calloutVendor = (state, action) => {
   return state.merge({ calloutVendor })
 }
 
+export const blockVendor = (state, action) =>
+  state.merge({ fetching: true, payload: null })
+
+export const blockSuccess = state =>
+  state.merge({ fetching: false, payload: null, error: null })
+
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -81,5 +89,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.VENDOR_LIST_REQUEST]: listRequest,
   [Types.VENDOR_LIST_SUCCESS]: listSuccess,
   [Types.VENDOR_LIST_FAILURE]: listFailure,
-  [Types.CALLOUT_VENDOR]: calloutVendor
+  [Types.CALLOUT_VENDOR]: calloutVendor,
+  [Types.VENDOR_BLOCK]: blockVendor,
+  [Types.BLOCK_SUCCESS]: blockSuccess
 })

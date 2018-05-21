@@ -10,9 +10,11 @@ class HelpScreen extends Component {
     return (
       <View style={styles.mainContainer}>
         <ScrollView style={styles.container}>
-          <Text>
-            {`Help and Support`}
-          </Text>
+          <View style={[styles.centered, styles.section]}>
+            <Text>
+              {`Coming soon... you got this ¯\\_(ツ)_/¯`}
+            </Text>
+          </View>
         </ScrollView>
       </View>
     )
