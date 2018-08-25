@@ -37,8 +37,13 @@ class VendorLocator extends React.Component {
   // }
 
   renderMapMarkers (vendor) {
+    const current_vendor = this.props.current_vendor;
+    let pinColor = 'red';
+    if (current_vendor && vendor.name === current_vendor.name) {
+      pinColor = 'green';
+    }
     return (
-      <MapView.Marker key={vendor.name} coordinate={{latitude: Number(vendor.latitude), longitude: Number(vendor.longitude)}} onPress={this.props.calloutVendor.bind(this, vendor)} />
+      <MapView.Marker key={vendor.name} pinColor={pinColor} coordinate={{latitude: Number(vendor.latitude), longitude: Number(vendor.longitude)}} onPress={this.props.calloutVendor.bind(this, vendor)} />
     )
   }
 
@@ -68,6 +73,7 @@ class VendorLocator extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    current_vendor: state.vendor.calloutVendor,
     vendors: state.vendor.vendors,
     locations: state.vendor.locations,
     region: state.vendor.region,
