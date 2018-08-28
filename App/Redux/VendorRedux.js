@@ -62,7 +62,7 @@ export const listSuccess = (state, action) => {
   }))
   const region = calculateRegion(locations, { latPadding: 0.1, longPadding: 0.1 })
 
-  return state.merge({ fetching: false, error: null, vendors, locations, region, calloutVendor: vendors[0] })
+  return state.merge({ fetching: false, error: null, vendors, locations, region, calloutVendor: null })
 }
 
 export const listFailure = state =>
