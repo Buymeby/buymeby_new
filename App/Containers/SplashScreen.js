@@ -18,14 +18,14 @@ export default class SplashScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: "row",
-        alignItems: "stretch"
-    },
-    cover: {
-        flex: 1,
-        width: null,
-        height: null
-    }
-});
+  container: {
+      flex: 1,
+      flexDirection: "row",
+      alignItems: "stretch"
+  },
+  cover: {
+      flex: 1,
+      width: null,
+      height: null
+  }
+})
