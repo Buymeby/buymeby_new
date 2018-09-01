@@ -15,6 +15,14 @@ import {
 import VendorActions from '../Redux/VendorRedux'
 import Chevron from '../Components/Chevron'
 
+const shorten_description = (description) => {
+  if (description && description.length > 90) {
+    return description.substr(0, 90) + '...'
+  } else {
+    return description
+  }
+}
+
 class VendorListItem extends React.Component {
   constructor (props) {
     super(props)
@@ -92,7 +100,7 @@ class VendorListItem extends React.Component {
               {this.printStatus(vendor.hours)}
             </View>
             <View styleName="horizontal">
-              <Caption>{vendor.description}</Caption>
+              <Caption>{shorten_description(vendor.description)}</Caption>
             </View>
           </View>
           <Button styleName="right-icon">
