@@ -28,17 +28,19 @@ class VendorListItem extends React.Component {
     super(props)
   }
 
-  //   <Text style={styles.infoText} key={day + i}>
-  //     {timeToHumanReadable(day_hours.open_time) + ' - ' + timeToHumanReadable(day_hours.close_time)}
-  //   </Text>
-  // )
-  getVendorStatus(hours) {
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+  getDayHours(hours) {
     const current_date = new Date()
     const day_index = current_date.getDay()
+    return hours.find(day_hours => day_hours.day === this.days[day_index])
+  }
+
+  getVendorStatus(hours) {
+    const current_date = new Date()
     const current_hour = current_date.getHours()
     const current_minutes = current_date.getMinutes()
-    let day_hours = hours.find(day_hours => day_hours.day === days[day_index])
+    let day_hours = this.getDayHours(hours)
     const open_hour = new Date(day_hours.open_time).getHours()
     const open_minutes = new Date(day_hours.open_time).getMinutes()
     const close_hour = new Date(day_hours.close_time).getHours()
@@ -67,6 +69,17 @@ class VendorListItem extends React.Component {
     }
   }
 
+  displayCurrentHours(hours) {
+    let day_hours = this.getDayHours(hours)
+    if (day_hours.open_time && day_hours.close_time) {
+      return (
+        <Caption>
+          {': ' + timeToHumanReadable(day_hours.open_time) + ' - ' + timeToHumanReadable(day_hours.close_time)}
+        </Caption>
+      )
+    }
+  }
+
   printStatus(hours) {
     if (hours) {
       if (this.getVendorStatus(hours) === 'open_soon') {
@@ -75,11 +88,11 @@ class VendorListItem extends React.Component {
         return <Caption style={{color: 'orange'}}>Closing soon</Caption>
       } else if (this.getVendorStatus(hours) === 'open') {
         return <Caption style={{color: 'green'}}>Open now</Caption>
-      } else if (this.getVendorStatus(hours) === 'closed') {
+      } else {
         return <Caption style={{color: 'red'}}>Closed</Caption>
       }
     } else {
-      return <Caption style={{color: 'blue'}}>Closed</Caption>
+      return <Caption style={{color: 'red'}}>Closed</Caption>
     }
   }
 
@@ -98,6 +111,7 @@ class VendorListItem extends React.Component {
             <Subtitle>{vendor.name}</Subtitle>
             <View styleName="horizontal">
               {this.printStatus(vendor.hours)}
+              {this.displayCurrentHours(vendor.hours)}
             </View>
             <View styleName="horizontal">
               <Caption>{shorten_description(vendor.description)}</Caption>
