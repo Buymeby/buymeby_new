@@ -39,6 +39,7 @@ const create = (baseURL = `http://${scriptHostname}:3000/api/`) => {
   const registerUser = (userAttributes) => api.post('auth', userAttributes)
   const loginUser = (credentials) => api.post('auth/sign_in', credentials)
   const verifyToken = (tokenParams) => api.get('auth/validate_token', tokenParams)
+  const registerDevice = (token) => api.post('push', token)
 
   const config = api
   return {
@@ -53,6 +54,7 @@ const create = (baseURL = `http://${scriptHostname}:3000/api/`) => {
     registerUser,
     loginUser,
     verifyToken,
+    registerDevice,
     populateCart,
     placeOrder,
     cancelOrder,

@@ -5,6 +5,7 @@ import Toast from 'react-native-simple-toast'
 
 import AuthActions from '../Redux/AuthRedux'
 import StartupActions from '../Redux/StartupRedux'
+import * as PushNotification from '../Config/PushNotification'
 
 const authHeaderKeys: Array<string> = [
   'access-token',
@@ -26,6 +27,7 @@ export function * verifyToken (api, action) {
     if (response.ok) {
       setAuthHeaders(response.headers, api)
       persistAuthHeadersInDeviceStorage(response.headers)
+      PushNotification.configure(api)
       yield put(StartupActions.startupSuccess(response.data))
       yield put(AuthActions.tokenSuccess(response.data))
       yield put(NavigationActions.navigate({ routeName: 'DrawerNav'}))
@@ -54,6 +56,7 @@ export function * login (api, action) {
   if (response.ok) {
     setAuthHeaders(response.headers, api)
     persistAuthHeadersInDeviceStorage(response.headers)
+    PushNotification.configure(api)
     yield put(AuthActions.loginSuccess(response.data))
     Toast.show('Welcome back!');
     yield put(NavigationActions.navigate({ routeName: 'DrawerNav'}))
@@ -82,6 +85,7 @@ export function * register (api, action) {
   if (response.ok) {
     setAuthHeaders(response.headers, api)
     persistAuthHeadersInDeviceStorage(response.headers)
+    PushNotification.configure(api)
     yield put(AuthActions.registrationSuccess(response.data))
     Toast.show('Welcome to Buymeby!');
     yield put(NavigationActions.navigate({ routeName: 'DrawerNav'}))

@@ -12,4 +12,4 @@ if (__DEV__) {
   console.disableYellowBox = true
 }
 
-PushNotification.configure()
+// PushNotification.configure()

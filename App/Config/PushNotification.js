@@ -1,13 +1,10 @@
 import PushNotification from 'react-native-push-notification'
-import { PushNotificationIOS } from 'react-native'
+import { PushNotificationIOS, Platform } from 'react-native'
 
-const configure = () => {
-  console.tron.log('suck it')
-
+const configure = (api) => {
   PushNotification.configure({
     onRegister: function(token) {
-     console.tron.log('hoople motherfucker')
-     console.tron.log(token)
+      api.registerDevice(token)
     },
 
     onNotification: function(notification) {
