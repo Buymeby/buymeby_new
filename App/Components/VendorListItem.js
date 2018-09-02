@@ -30,6 +30,25 @@ class VendorListItem extends React.Component {
 
   days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
+  status = {
+    open_soon: {
+      color: 'green',
+      display_text: 'Opening Soon'
+    },
+    close_soon: {
+      color: 'orange',
+      display_text: 'Closing Soon'
+    },
+    open: {
+      color: 'green',
+      display_text: 'Open'
+    },
+    closed: {
+      color: 'red',
+      display_text: 'Closed'
+    }
+  }
+
   getDayHours(hours) {
     const current_date = new Date()
     const day_index = current_date.getDay()
@@ -82,15 +101,8 @@ class VendorListItem extends React.Component {
 
   printStatus(hours) {
     if (hours) {
-      if (this.getVendorStatus(hours) === 'open_soon') {
-        return <Caption style={{color: 'blue'}}>Opening soon</Caption>
-      } else if (this.getVendorStatus(hours) === 'close_soon') {
-        return <Caption style={{color: 'orange'}}>Closing soon</Caption>
-      } else if (this.getVendorStatus(hours) === 'open') {
-        return <Caption style={{color: 'green'}}>Open now</Caption>
-      } else {
-        return <Caption style={{color: 'red'}}>Closed</Caption>
-      }
+      vendor_status = this.status[this.getVendorStatus(hours)]
+      return <Caption style={{color: vendor_status.color}}>{vendor_status.display_text}</Caption>
     } else {
       return <Caption style={{color: 'red'}}>Closed</Caption>
     }
