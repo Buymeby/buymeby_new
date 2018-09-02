@@ -1,9 +1,17 @@
 import apisauce from 'apisauce'
+import { NativeModules } from 'react-native'
+
+let scriptHostname;
+if (__DEV__) {
+    const scriptURL = NativeModules.SourceCode.scriptURL;
+    scriptHostname = scriptURL.split('://')[1].split(':')[0];
+}
 
 // const create = (baseURL = 'http://10.0.2.2:3000/api/') => {
 // const create = (baseURL = 'http://localhost:3000/api/') => {
 // const create = (baseURL = 'https://buymeby-dev.cfapps.io/api/') => {
-const create = (baseURL = 'https://buymeby-prod.cfapps.io/api/') => {
+// const create = (baseURL = 'https://buymeby-prod.cfapps.io/api/') => {
+const create = (baseURL = `http://${scriptHostname}:3000/api/`) => {
 
   const api = apisauce.create({
     baseURL,
