@@ -4,6 +4,12 @@ import { NavigationActions } from 'react-navigation'
 import VendorActions from '../Redux/VendorRedux'
 import getDirections from 'react-native-google-maps-directions'
 import {
+  timeToHumanReadable,
+  getCurrentHours,
+  getStatusColor,
+  getStatusText
+} from '../Lib/OperationalHoursHelper'
+import {
   ScrollView,
   TouchableOpacity,
   Image,
@@ -26,7 +32,6 @@ import {
 } from '@shoutem/ui'
 
 import LoadingSpinner from '../Components/LoadingSpinner'
-import timeToHumanReadable from '../Lib/OperationalHoursHelper'
 import Chevron from '../Components/Chevron'
 
 import styles from './Styles/ItemDetailsScreenStyles'
@@ -66,6 +71,7 @@ class VendorDetailsScreen extends Component {
   }
 
   render () {
+    const { vendor } = this.props
     const fetching = this.props.fetching
 
     if (fetching) {
@@ -104,6 +110,12 @@ class VendorDetailsScreen extends Component {
                 <Image style={styles.avatar} source={image_source} />
               </View>
             </Tile>
+            <Row>
+              <Subtitle style={{textAlign: 'center'}}>
+                <Text style={{color: getStatusColor(vendor.hours)}}>{getStatusText(vendor.hours)}</Text>
+                <Text>{getCurrentHours(vendor.hours)}</Text>
+              </Subtitle>
+            </Row>
             <Row>
               <Subtitle>{this.props.description}</Subtitle>
             </Row>
