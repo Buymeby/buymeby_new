@@ -1,5 +1,3 @@
-import React from 'react'
-
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const status = {
   open_soon: {
