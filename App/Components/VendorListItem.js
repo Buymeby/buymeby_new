@@ -60,42 +60,48 @@ class VendorListItem extends React.Component {
     const current_hour = current_date.getHours()
     const current_minutes = current_date.getMinutes()
     let day_hours = this.getDayHours(hours)
-    const open_hour = new Date(day_hours.open_time).getHours()
-    const open_minutes = new Date(day_hours.open_time).getMinutes()
-    const close_hour = new Date(day_hours.close_time).getHours()
-    const close_minutes = new Date(day_hours.close_time).getMinutes()
-    if ((!(current_hour === close_hour && current_minutes < close_minutes)) &&
-       ((current_hour === open_hour && current_minutes < open_minutes) ||
-       (current_hour === open_hour-1 && current_minutes >= open_minutes) ||
-       (open_hour === 0 && current_hour === 23 && current_minutes >= open_minutes)))
-    {
-      return 'open_soon'
-    } else if ((!(current_hour === open_hour && current_minutes < open_minutes)) &&
-              ((current_hour === close_hour && current_minutes < close_minutes) ||
-              (current_hour === close_hour-1 && current_minutes >= close_minutes) ||
-              (close_hour === 0 && current_hour === 23 && current_minutes >= close_minutes)))
+    if (day_hours) {
+      const open_hour = new Date(day_hours.open_time).getHours()
+      const open_minutes = new Date(day_hours.open_time).getMinutes()
+      const close_hour = new Date(day_hours.close_time).getHours()
+      const close_minutes = new Date(day_hours.close_time).getMinutes()
+      if ((!(current_hour === close_hour && current_minutes < close_minutes)) &&
+         ((current_hour === open_hour && current_minutes < open_minutes) ||
+         (current_hour === open_hour-1 && current_minutes >= open_minutes) ||
+         (open_hour === 0 && current_hour === 23 && current_minutes >= open_minutes)))
+      {
+        return 'open_soon'
+      } else if ((!(current_hour === open_hour && current_minutes < open_minutes)) &&
+                ((current_hour === close_hour && current_minutes < close_minutes) ||
+                (current_hour === close_hour-1 && current_minutes >= close_minutes) ||
+                (close_hour === 0 && current_hour === 23 && current_minutes >= close_minutes)))
 
-    {
-      return 'close_soon'
-    } else if ((open_hour > close_hour && (current_hour < close_hour || current_hour > open_hour)) ||
-              (open_hour > close_hour && current_hour === open_hour && current_minutes >= open_minutes && current_hour > close_hour) ||
-              (close_hour > open_hour && current_hour === open_hour && current_minutes >= open_minutes && current_hour < close_hour) ||
-              (close_hour > open_hour && current_hour > open_hour && current_hour < close_hour))
-    {
-      return 'open'
+      {
+        return 'close_soon'
+      } else if ((open_hour > close_hour && (current_hour < close_hour || current_hour > open_hour)) ||
+                (open_hour > close_hour && current_hour === open_hour && current_minutes >= open_minutes && current_hour > close_hour) ||
+                (close_hour > open_hour && current_hour === open_hour && current_minutes >= open_minutes && current_hour < close_hour) ||
+                (close_hour > open_hour && current_hour > open_hour && current_hour < close_hour))
+      {
+        return 'open'
+      } else {
+        return 'closed'
+      }
     } else {
       return 'closed'
     }
   }
 
   displayCurrentHours(hours) {
-    let day_hours = this.getDayHours(hours)
-    if (day_hours.open_time && day_hours.close_time) {
-      return (
-        <Caption>
-          {': ' + timeToHumanReadable(day_hours.open_time) + ' - ' + timeToHumanReadable(day_hours.close_time)}
-        </Caption>
-      )
+    if (hours) {
+      let day_hours = this.getDayHours(hours)
+      if (day_hours && day_hours.open_time && day_hours.close_time) {
+        return (
+          <Caption>
+            {': ' + timeToHumanReadable(day_hours.open_time) + ' - ' + timeToHumanReadable(day_hours.close_time)}
+          </Caption>
+        )
+      }
     }
   }
 
