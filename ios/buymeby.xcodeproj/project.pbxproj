@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -45,7 +46,6 @@
 		4F8A9273102548348C932E52 /* libLRDRCTSimpleToast.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD622B228024B7F92325FBB /* libLRDRCTSimpleToast.a */; };
 		5C7DD9AE9E3A483880C6B50C /* Rubik-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7268AEDF4E3C416595DA302A /* Rubik-Light.ttf */; };
 		5E7AB92E02E94E8BA068A6E6 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66AAAFEFDCB24D9CB72C4FE4 /* Foundation.ttf */; };
-		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		638BDCED06B443C38A75FD69 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B2E27C5C8AD4684BEC0EC63 /* Ionicons.ttf */; };
 		63BBCEEE06DC447894BCDC44 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9B7E7ABE6A14C629880C481 /* Feather.ttf */; };
 		6B70EDD89BE74DC18118287F /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B923CB8BECA49E3A17E8595 /* libReactNativeConfig.a */; };
@@ -1463,7 +1463,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-buymeby/Pods-buymeby-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
