@@ -115,6 +115,12 @@ class VendorDetailsScreen extends Component {
                 <Text style={{color: getStatusColor(vendor.hours)}}>{getStatusText(vendor.hours)}</Text>
                 <Text>{getCurrentHours(vendor.hours)}</Text>
               </Subtitle>
+              <Subtitle style={{textAlign: 'center'}}>
+                {vendor.accepting_orders ?
+                  <Text style={{color: yellow}}>This vendor is accepting reservations. Reserve items on here!</Text> :
+                  <Text style={{color: yellow}}>This vendor is not accepting reservations. Check out their items on here and go visit them!</Text>
+                }
+              </Subtitle>
             </Row>
             <Row>
               <Subtitle>{this.props.description}</Subtitle>

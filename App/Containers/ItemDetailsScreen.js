@@ -84,9 +84,10 @@ class ItemDetailsScreen extends Component {
         			minQuantity={1}
         			maxQuantity={item.quantity}
               onChange={this.setQuantity} />
-            <TouchableOpacity style={styles.button} onPress={this.props.addToCart.bind(this, vendor, item, selectedQuantity)}>
+            <TouchableOpacity activeOpacity={vendor.accepting_orders ? 1 : 0.5} style={styles.button} onPress={vendor.accepting_orders && this.props.addToCart.bind(this, vendor, item, selectedQuantity)}>
               <Text style={styles.buttonText}>ADD TO CART</Text>
             </TouchableOpacity>
+            {!vendor.accepting_orders && <Text style={{textAlign: 'center'}}>This vendor is not accepting reservations</Text>}
             <TouchableOpacity onPress={() => { this.setModalVisible(true) }}>
               <Text style={styles.cautionText}>report</Text>
             </TouchableOpacity>
