@@ -162,6 +162,15 @@ class VendorDetailsScreen extends Component {
                 </Row>
               </View>
             </Row>
+            <Divider styleName='line' />
+              <Row>
+                <View style={{flexDirection: 'row'}}>
+                  <Subtitle>Accepting reservations: </Subtitle>
+                  <Subtitle style={{color: vendor.accepting_orders ? 'green' : 'red'}}>
+                    {vendor.accepting_orders ? "Yes" : "No"}
+                  </Subtitle>
+                </View>
+              </Row>
             <Divider styleName="line" />
             <TouchableOpacity onPress={() => { this.setModalVisible(true) }}>
               <Row>

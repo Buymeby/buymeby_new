@@ -17,6 +17,11 @@ export default StyleSheet.create({
     marginVertical: 10,
     backgroundColor: Colors.secondary
   },
+  disabledButton: {
+    width: '40%',
+    marginVertical: 10,
+    backgroundColor: Colors.steel
+  },
   buttonText: {
     margin: 10,
     textAlign: 'center',
