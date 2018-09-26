@@ -42,5 +42,10 @@ export default StyleSheet.create({
   },
   infoText: {
     color: Colors.charcoal
+  },
+  noOrdersText: {
+    textAlign: 'center',
+    color: Colors.grey,
+    fontSize: Fonts.size.small
   }
 })
