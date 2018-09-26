@@ -1,14 +1,14 @@
-package com.buymeby;
+package com.buymeby.buymeby;
 
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
-import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
-import com.reactnative.photoview.PhotoViewPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
-import com.airbnb.android.react.maps.MapsPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.reactnative.photoview.PhotoViewPackage;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -29,12 +29,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ReactNativePushNotificationPackage(),
-            new ReactNativeConfigPackage(),
+            new VectorIconsPackage(),
             new PhotoViewPackage(),
+            new ReactNativeConfigPackage(),
+            new ReactNativePushNotificationPackage(),
             new LinearGradientPackage(),
-            new MapsPackage(),
-            new VectorIconsPackage()
+            new MapsPackage()
       );
     }
 
