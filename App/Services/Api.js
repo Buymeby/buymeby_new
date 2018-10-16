@@ -39,7 +39,7 @@ const create = (baseURL = 'https://buymeby-prod.cfapps.io/api/') => {
   const registerUser = (userAttributes) => api.post('auth', userAttributes)
   const loginUser = (credentials) => api.post('auth/sign_in', credentials)
   const verifyToken = (tokenParams) => api.get('auth/validate_token', tokenParams)
-  const registerDevice = (token) => api.post('push', token)
+  const registerDevice = (device) => api.post('push', device)
 
   const config = api
   return {
