@@ -79,14 +79,22 @@ class ItemDetailsScreen extends Component {
             </View>
             <Subtitle styleName="md-gutter-top">{item.description}</Subtitle>
             <Title styleName="md-gutter-top">${item.price} / {item.unit}</Title>
-            <QuantitySelector
-        			value={selectedQuantity}
-        			minQuantity={1}
-        			maxQuantity={item.quantity}
-              onChange={this.setQuantity} />
-            <TouchableOpacity style={styles.button} onPress={this.props.addToCart.bind(this, vendor, item, selectedQuantity)}>
-              <Text style={styles.buttonText}>ADD TO CART</Text>
-            </TouchableOpacity>
+            {vendor.accepting_orders &&
+                <QuantitySelector
+            			value={selectedQuantity}
+            			minQuantity={1}
+            			maxQuantity={item.quantity}
+                  onChange={this.setQuantity} />
+            }
+            {vendor.accepting_orders ?
+              <TouchableOpacity style={styles.button} onPress={this.props.addToCart.bind(this, vendor, item, selectedQuantity)}>
+                <Text style={styles.buttonText}>ADD TO CART</Text>
+              </TouchableOpacity>
+            :
+              <View style={{paddingTop: 50, paddingBottom: 50}}>
+                <Text style={styles.noOrdersText}>This vendor is not accepting pre-orders for this item at the moment.</Text>
+              </View>
+            }
             <TouchableOpacity onPress={() => { this.setModalVisible(true) }}>
               <Text style={styles.cautionText}>report</Text>
             </TouchableOpacity>
